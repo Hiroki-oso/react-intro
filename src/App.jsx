@@ -1,24 +1,40 @@
+import { useState } from 'react';
 import './App.css'
 import Example from './Example';
 import Fun from './Fun';
 
 function App() {
-    let color = 'green';
+    let colorState = useState('green');
+    let color = colorState[0];
+    let setColor = colorState[1]
+    const [ favoriteNumber, setFavoriteNumber ] = useState(7);
+    const [show, setShow] = useState(true);
     let name = "Hiroki";
     let colors = ['red', 'yellow', 'green', 'blue'];
     let favoriteNumbers = [7, 77, 43, 90, 81];
     function hola() {
-      // alert('Hola!!!!!')
+      setColor('blue' + Math.random())
     }
     function onLeaveFavoriteColor() {
       console.log('leaving favorite colors')
     }
+    function toggleParagraph() {
+      setShow((currentShow) => {
+        return !currentShow;
+      });
+    }
+    function favNumber() {
+      setFavoriteNumber(13);
+    } 
+
     return (
       <>
       <h1>My favorite color is: {color}</h1>
+      <h2>Favorite Number{favoriteNumber}</h2>
       <h2>hi {name}</h2>
+      {show && <p>Hi this is my paragraph</p>}
       <Fun name={name}/>
-      <Example color={name}/>
+      <Example color={color}/>
       <ol onMouseOver={hola}>
         {favoriteNumbers.map(n => {
           return <li key={n}>{n}</li>
@@ -30,7 +46,9 @@ function App() {
 
         })}
       </ul>
+      <button onClick={favNumber}>Change Number</button>
       <button onClick={hola} >Hola!</button>
+      <button onClick={toggleParagraph} >{ show ? 'Hide' : 'Show'} paragraph</button>
       </>
       );
 }
