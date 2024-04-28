@@ -12,8 +12,12 @@ function App() {
     let name = "Hiroki";
     let colors = ['red', 'yellow', 'green', 'blue'];
     let favoriteNumbers = [7, 77, 43, 90, 81];
+    const ulStyles = {
+      color: 'red',
+      backgroundColor: 'purple', 
+    }
     function hola() {
-      setColor('blue' + Math.random())
+      setColor('pink');
     }
     function onLeaveFavoriteColor() {
       console.log('leaving favorite colors')
@@ -30,7 +34,7 @@ function App() {
     return (
       <>
       <h1>My favorite color is: {color}</h1>
-      <h2>Favorite Number{favoriteNumber}</h2>
+      <h2 style={{ color: show ? 'yellow' : 'aqua'}} >Favorite Number {favoriteNumber}</h2>
       <h2>hi {name}</h2>
       {show && <p>Hi this is my paragraph</p>}
       <Fun name={name}/>
@@ -40,11 +44,13 @@ function App() {
           return <li key={n}>{n}</li>
         })}
       </ol>
-      <ul onMouseLeave={onLeaveFavoriteColor}>
-        {colors.map((c, index) => {
-          return <li key={index}>{c}</li>
+      <ul 
+        style={{ color: 'green', backgroundColor: color}} 
+        onMouseLeave={onLeaveFavoriteColor}>
+          {colors.map((c, index) => {
+            return <li key={index}>{c}</li>
 
-        })}
+          })}
       </ul>
       <button onClick={favNumber}>Change Number</button>
       <button onClick={hola} >Hola!</button>
