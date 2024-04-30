@@ -9,6 +9,7 @@ function App() {
     let setColor = colorState[1]
     const [ favoriteNumber, setFavoriteNumber ] = useState(7);
     const [show, setShow] = useState(true);
+    const [degree, setDegree] = useState(0);
     let name = "Hiroki";
     let colors = ['red', 'yellow', 'green', 'blue'];
     let favoriteNumbers = [7, 77, 43, 90, 81];
@@ -31,15 +32,40 @@ function App() {
       setFavoriteNumber(13);
     } 
 
+    function onChangeFavoriteNumber(e){
+      const number = +e.target.value;
+      setFavoriteNumber(number)
+    }
+    function onRotate(e) {
+      const newDegree = +e.target.value;
+      setDegree(newDegree);
+
+    }
+
     return (
       <>
-      <h1>My favorite color is: {color}</h1>
+      <h1 className={show ? "awesome" : "cool"}>My favorite color is: {color}</h1>
       <h2 style={{ color: show ? 'yellow' : 'aqua'}} >Favorite Number {favoriteNumber}</h2>
+      <input 
+        type="number" 
+        value={favoriteNumber} 
+        onChange={onChangeFavoriteNumber}
+        placeholder='Enter Favorite Number' 
+      />
       <h2>hi {name}</h2>
+      <h2 style={{transform: `rotateX(${degree}deg)`}}>Rotate</h2>
+      <input 
+        type="range"
+        onChange={onRotate} 
+        value={degree} 
+        min={0} 
+        max={360} 
+        step={1} 
+      />
       {show && <p>Hi this is my paragraph</p>}
       <Fun name={name}/>
       <Example color={color}/>
-      <ol onMouseOver={hola}>
+      <ol className={show ? 'happy' : 'sad'} onMouseOver={hola}>
         {favoriteNumbers.map(n => {
           return <li key={n}>{n}</li>
         })}
